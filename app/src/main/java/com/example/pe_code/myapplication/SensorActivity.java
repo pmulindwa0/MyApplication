@@ -13,6 +13,7 @@ import android.support.v7.view.ActionMode;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,11 +28,13 @@ import ioio.lib.util.BaseIOIOLooper;
 import ioio.lib.util.IOIOLooper;
 import ioio.lib.util.android.IOIOActivity;
 
-public class SensorActivity extends IOIOActivity implements AppCompatCallback {
+public class SensorActivity extends IOIOActivity implements AppCompatCallback{
+//
 
     public TextView tempView;
-    String temp;
-    String moisture;
+    public ArcProgress hProgress;
+    public ArcProgress mProgress;
+    public ProgressBar tProgress;
     TwiMaster twi;
     byte[] response;
     int i;
@@ -55,8 +58,10 @@ public class SensorActivity extends IOIOActivity implements AppCompatCallback {
         delegate.getSupportActionBar().setIcon(R.drawable.ic_launcher);
 
         tempView = (TextView) findViewById(R.id.textView);
-//        ArcProgress prg = (ArcProgress) findViewById(R.id.arc_progress);
-//        prg.setProgress(22);
+        hProgress = (ArcProgress) findViewById(R.id.humidity_progress);
+        mProgress = (ArcProgress) findViewById(R.id.moisture_progress);
+        tProgress = (ProgressBar) findViewById(R.id.progressBar);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +115,7 @@ public class SensorActivity extends IOIOActivity implements AppCompatCallback {
         public void loop() throws ConnectionLostException, InterruptedException {
             super.loop();
             byte[] request = new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05 };
-            response = new byte[4];
+            response = new byte[6];
             TwiMaster.Result result = twi.writeReadAsync(8, false, request, request.length, response, response.length);
 // ...do some stuff while the transaction is taking place...
             result.waitReady();  // blocks until response is available
@@ -120,16 +125,19 @@ public class SensorActivity extends IOIOActivity implements AppCompatCallback {
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
-
-            temp = responseString.substring(0,2);
-            moisture = responseString.substring(2,4);
-
+//
+//            temp = responseString.substring(0,2);
+//            humidity = responseString.substring(2,4);
+//            moisture = responseString.substring(4,6);
+//
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
 
-                    tempView.setText(temp);
-                    tempView.setEnabled(true);
+                    tempView.setText(responseString.substring(0,2));
+                    tProgress.setProgress(Integer.parseInt(responseString.substring(0, 2)));
+                    hProgress.setProgress(Integer.parseInt(responseString.substring(2,4)));
+                    mProgress.setProgress(Integer.parseInt(responseString.substring(4,6)));
                 }
             });
 
@@ -144,7 +152,6 @@ public class SensorActivity extends IOIOActivity implements AppCompatCallback {
                 @Override
                 public void run() {
                     Toast.makeText(SensorActivity.this, "IOIO disconnected", Toast.LENGTH_LONG).show();
-                    tempView.setEnabled(false);
                 }
             });
 

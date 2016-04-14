@@ -34,7 +34,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/temperature"
+            android:text="00"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="36dp" />
 
@@ -54,7 +54,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
             android:padding="4dp"
-            android:progress="25" />
+            android:progress="0" />
     </LinearLayout>
 
     <TextView
@@ -79,7 +79,7 @@
             android:background="#ffffff"
             custom:arc_bottom_text="HUMIDITY"
             custom:arc_bottom_text_size="10sp"
-            custom:arc_progress="55" />
+            custom:arc_progress="00" />
 
         <com.github.lzyzsd.circleprogress.ArcProgress
             android:id="@+id/moisture_progress"
@@ -89,7 +89,7 @@
             android:background="#ffffff"
             custom:arc_bottom_text="MOISTURE"
             custom:arc_bottom_text_size="10sp"
-            custom:arc_progress="62" />
+            custom:arc_progress="00" />
     </LinearLayout>
     <TextView
         style="?android:listSeparatorTextViewStyle"
