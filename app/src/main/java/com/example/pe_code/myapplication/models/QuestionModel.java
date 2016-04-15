@@ -1,5 +1,8 @@
 package com.example.pe_code.myapplication.models;
 
+import android.content.Context;
+import android.telephony.TelephonyManager;
+
 /**
  * Created by PE-CODE on 2/26/2016.
  */
@@ -30,5 +33,13 @@ public class QuestionModel {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getIMEI(Context context){
+
+        TelephonyManager mngr = (TelephonyManager) context.getSystemService(context.TELEPHONY_SERVICE);
+        String imei = mngr.getDeviceId();
+        return imei;
+
     }
 }

@@ -29,7 +29,6 @@ import ioio.lib.util.IOIOLooper;
 import ioio.lib.util.android.IOIOActivity;
 
 public class SensorActivity extends IOIOActivity implements AppCompatCallback{
-//
 
     public TextView tempView;
     public ArcProgress hProgress;
@@ -125,11 +124,7 @@ public class SensorActivity extends IOIOActivity implements AppCompatCallback{
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
-//
-//            temp = responseString.substring(0,2);
-//            humidity = responseString.substring(2,4);
-//            moisture = responseString.substring(4,6);
-//
+
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {

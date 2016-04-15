@@ -19,6 +19,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.pe_code.myapplication.models.QuestionModel;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -68,14 +70,17 @@ private static final String DIALOG_PERSON = "person";
         btnSend.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                QuestionModel model = new QuestionModel();
                 Context contx;
                 contx=getActivity();
                 String http = "http://192.168.1.120/restfullapi/question.php";
                 String charset = "UTF-8";
                 String query = null;
+                String imei= model.getIMEI(getActivity());
                 String question = qnEditText.getText().toString();
                 try {
-                   query = String.format("question=%s", URLEncoder.encode(question, charset));
+                   query = String.format("imei=%s&question=%s", URLEncoder.encode(imei, charset),
+                           URLEncoder.encode(question, charset));
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }

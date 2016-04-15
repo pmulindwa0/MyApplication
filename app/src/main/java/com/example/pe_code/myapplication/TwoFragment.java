@@ -1,6 +1,7 @@
 package com.example.pe_code.myapplication;
 
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -44,7 +45,39 @@ public class TwoFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_refresh:
+
+                break;
+            case R.id.action_settings:
+
+                break;
+
+            default:
+                break;
+        }
         return super.onOptionsItemSelected(item);
     }
 
+}
+class AnswerTask extends AsyncTask<String,String,String >{
+
+    public AnswerTask() {
+        super();
+    }
+
+    @Override
+    protected String doInBackground(String... params) {
+        return null;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+    }
+
+    @Override
+    protected void onPostExecute(String s) {
+        super.onPostExecute(s);
+    }
 }
