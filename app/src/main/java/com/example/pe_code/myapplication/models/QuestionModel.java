@@ -10,6 +10,8 @@ public class QuestionModel {
     private String question;
     private String person;
     private String image;
+    private  String date;
+    private  String answer;
 
     public String getQuestion() {
         return question;
@@ -41,5 +43,21 @@ public class QuestionModel {
         String imei = mngr.getDeviceId();
         return imei;
 
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 }

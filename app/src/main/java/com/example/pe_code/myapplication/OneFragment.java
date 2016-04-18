@@ -1,6 +1,7 @@
 package com.example.pe_code.myapplication;
 
 import android.annotation.TargetApi;
+import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -78,6 +79,12 @@ public class OneFragment extends Fragment {
                     }
                     case 2: {
                         Notification();
+                        break;
+                    }
+                    case 3: {
+//                        TwoFragment fragment = new TwoFragment();
+//                        getActivity().getFragmentManager().beginTransaction().
+//                                replace(R.id.fragment, fragment, "A").commit();
                         break;
                     }
 

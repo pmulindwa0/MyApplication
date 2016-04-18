@@ -73,7 +73,7 @@ private static final String DIALOG_PERSON = "person";
                 QuestionModel model = new QuestionModel();
                 Context contx;
                 contx=getActivity();
-                String http = "http://192.168.1.120/restfullapi/question.php";
+                String http = "http://192.168.1.122/restfullapi/question.php";
                 String charset = "UTF-8";
                 String query = null;
                 String imei= model.getIMEI(getActivity());
@@ -93,7 +93,7 @@ private static final String DIALOG_PERSON = "person";
 
 
 }
-class QuestionTask extends AsyncTask<String,String,String >{
+ class QuestionTask extends AsyncTask<String,String,String >{
     private Context mContext;
     ProgressDialog pDialog;
     public QuestionTask(Context contx) {
@@ -128,11 +128,6 @@ class QuestionTask extends AsyncTask<String,String,String >{
             connection.connect();
 
             //Create JSONObject here
-//            JSONObject jsonParam = new JSONObject();
-//            jsonParam.put("question", params[1]);
-//            OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
-//            out.write(jsonParam.toString());
-//            out.close();
 
             int HttpResult =connection.getResponseCode();
             if(HttpResult ==HttpURLConnection.HTTP_OK){
