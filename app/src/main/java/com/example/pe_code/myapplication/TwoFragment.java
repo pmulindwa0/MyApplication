@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -75,7 +76,7 @@ public class TwoFragment extends Fragment {
                 QuestionModel model = new QuestionModel();
                 Context contx;
                 contx=getActivity();
-                String http = "http://192.168.1.122/restfullapi/get_answers.php";
+                String http = "http://192.168.1.124/restfullapi/get_answers.php";
 //                String charset = "UTF-8";
 //                String query = null;
 //                String imei= model.getIMEI(getActivity());
@@ -230,7 +231,9 @@ public class TwoFragment extends Fragment {
             TextView date = (TextView)convertView.findViewById(R.id.date);
 
             question.setText(questionModelList.get(position).getQuestion());
+            question.setMovementMethod(new ScrollingMovementMethod());
             answer.setText(questionModelList.get(position).getAnswer());
+            answer.setMovementMethod(new ScrollingMovementMethod());
             date.setText(questionModelList.get(position).getDate());
 
             return convertView;

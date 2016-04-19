@@ -4,7 +4,7 @@
 
     <!-- Internet Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -25,9 +25,8 @@
         <activity
             android:name=".SensorActivity"
             android:label="@string/title_activity_sensor"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".MainActivity">
-
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED" />
             </intent-filter>
@@ -48,8 +47,20 @@
         <activity
             android:name=".WeatherActivity"
             android:label="@string/title_activity_weather"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
-
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".SensorActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.pe_code.myapplication.SensorActivity" />
         </activity>
     </application>
 
