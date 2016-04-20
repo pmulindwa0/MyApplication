@@ -77,18 +77,17 @@ public class TwoFragment extends Fragment {
                 Context contx;
                 contx=getActivity();
                 String http = "http://192.168.1.124/restfullapi/get_answers.php";
-//                String charset = "UTF-8";
-//                String query = null;
-//                String imei= model.getIMEI(getActivity());
-//
-//                try {
-//                    query = String.format("imei=%s", URLEncoder.encode(imei, charset));
-//                } catch (UnsupportedEncodingException e) {
-//                    e.printStackTrace();
-//                }
-//                String url = http + "?" + query;
-//                new AnswerTask(contx).execute(url);
-                new AnswerTask(contx).execute(http);
+                String charset = "UTF-8";
+                String query = null;
+                String imei= model.getIMEI(getActivity());
+
+                try {
+                    query = String.format("imei=%s", URLEncoder.encode(imei, charset));
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                String url = http + "?" + query;
+                new AnswerTask(contx).execute(url);
 
                 /********on refreshing******************/
 

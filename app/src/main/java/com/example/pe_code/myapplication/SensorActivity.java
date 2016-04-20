@@ -1,8 +1,13 @@
 package com.example.pe_code.myapplication;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -20,9 +25,17 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pe_code.myapplication.models.QuestionModel;
 import com.github.lzyzsd.circleprogress.ArcProgress;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 
 import ioio.lib.api.AnalogInput;
 import ioio.lib.api.TwiMaster;
@@ -81,21 +94,6 @@ public class SensorActivity extends IOIOActivity implements AppCompatCallback{
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                break;
-
-            case R.id.action_settings:
-                Intent i = new Intent(this, SettingsActivity.class);
-                startActivity(i);
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public void onSupportActionModeStarted(ActionMode mode) {
@@ -173,6 +171,125 @@ public class SensorActivity extends IOIOActivity implements AppCompatCallback{
     protected IOIOLooper createIOIOLooper() {
         return new SensorLooper();
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                break;
+
+            case R.id.action_settings:
+                Intent i = new Intent(this, SettingsActivity.class);
+                startActivity(i);
+                break;
+
+            case R.id.action_send:{
+
+                QuestionModel model = new QuestionModel();
+                SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                String http = "http://192.168.1.124/restfullapi/request.php";
+                String charset = "UTF-8";
+                String query = null;
+                String imei= model.getIMEI(this);
+                String location = sp.getString("location", "N/A");
+                String crop = sp.getString("crop", "N/A");
+                String activity = sp.getString("activity","1");
+                if(responseString== null){
+                    responseString = "255465";
+                }
+                String temp = responseString.substring(0,2);
+                String moisture = responseString.substring(4,6);
+                String humidity = responseString.substring(2,4);
+
+
+                try {
+                    query = String.format("imei=%s&location=%s&crop=%s&activity=%s&temp=%s&humidity=%s&moisture=%s",
+                            URLEncoder.encode(imei, charset),
+                            URLEncoder.encode(location, charset),
+                            URLEncoder.encode(crop, charset),
+                            URLEncoder.encode(activity, charset),
+                            URLEncoder.encode(temp, charset),
+                            URLEncoder.encode(humidity, charset),
+                            URLEncoder.encode(moisture, charset));
+
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                String url = http + "?" + query;
+                RequestTask request = new RequestTask();
+                request.execute(url);
+            }
+
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    private class RequestTask extends AsyncTask<String,String,String > {
+//        private Context mContext;
+//        public RequestTask(Context contx) {
+//            this.mContext=contx;
+//        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Toast.makeText(getApplicationContext(), "Starting download",Toast.LENGTH_LONG).show();
+
+        }
+        @Override
+        protected String doInBackground(String... params) {
+            HttpURLConnection connection = null;
+            try {
+                StringBuilder sb = new StringBuilder();
+                URL url = new URL(params[0]);
+                connection = (HttpURLConnection) url.openConnection();
+
+                connection.setDoOutput(true);
+                connection.setRequestMethod("GET");
+                connection.setUseCaches(false);
+                connection.setConnectTimeout(10000);
+                connection.setReadTimeout(10000);
+                connection.setRequestProperty("Content-Type","application/json");
+                connection.connect();
+
+                //Create JSONObject here
+
+                int HttpResult =connection.getResponseCode();
+                if(HttpResult ==HttpURLConnection.HTTP_OK){
+                    BufferedReader br = new BufferedReader(new InputStreamReader(
+                            connection.getInputStream(),"utf-8"));
+                    String line = null;
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line + "\n");
+                    }
+                    br.close();
+
+                    return sb.toString();
+
+                }
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally{
+                if(connection!=null)
+                    connection.disconnect();
+            }
+            return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Toast.makeText(getApplicationContext()," Request submitted successfully", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
 }
 

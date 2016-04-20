@@ -1,20 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <EditTextPreference
-        android:key="crop"
-        android:summary="What are the crop or plant preferences of your field"
-        android:title="Crop Species"></EditTextPreference>
+    <PreferenceCategory android:title="General">
+        <EditTextPreference
+            android:key="crop"
+            android:summary="What are the crop or plant preferences of your field"
+            android:title="Crop Species"></EditTextPreference>
 
-    <EditTextPreference
-        android:key="location"
-        android:summary="Please provide your geographical location"
-        android:title="Your Location"></EditTextPreference>
+        <EditTextPreference
+            android:key="location"
+            android:summary="Please provide your geographical location"
+            android:title="Your Location"></EditTextPreference>
 
-    <ListPreference
-        android:defaultValue="1"
-        android:entries="@array/listArray"
-        android:entryValues="@array/listValues"
-        android:key="activity"
-        android:summary="Select the kind of activity that you would like to carry out on your field"
-        android:title="Activity" />
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/listArray"
+            android:entryValues="@array/listValues"
+            android:key="activity"
+            android:summary="Select the kind of activity that you would like to carry out on your field"
+            android:title="Activity" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Appearance">
+        <CheckBoxPreference
+            android:title="Colour"
+            android:key="background_colour"
+            android:defaultValue="false"
+            android:summary="Change the background colour of the application"
+            ></CheckBoxPreference>
+    </PreferenceCategory>
+
 </PreferenceScreen>

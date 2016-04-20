@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.pe_code.myapplication.SensorActivity">
     <item
-        android:id="@+id/action_share"
-        android:icon="@android:drawable/ic_menu_share"
+        android:id="@+id/action_send"
+        android:icon="@android:drawable/ic_menu_send"
         android:orderInCategory="100"
-        android:title="Refresh"
+        android:title="Send"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_settings"
