@@ -47,7 +47,7 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
             case "News Feeds":
                 imageView.setImageResource(R.mipmap.ic_risk);
                 break;
-            case "Answers to questions":
+            case "Advisory Services":
                 imageView.setImageResource(R.mipmap.ic_analysis);
                 break;
             default:imageView.setImageResource(R.mipmap.ic_launcher);

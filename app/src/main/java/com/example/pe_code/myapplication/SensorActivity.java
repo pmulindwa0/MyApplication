@@ -229,10 +229,7 @@ public class SensorActivity extends IOIOActivity implements AppCompatCallback{
 
 
     private class RequestTask extends AsyncTask<String,String,String > {
-//        private Context mContext;
-//        public RequestTask(Context contx) {
-//            this.mContext=contx;
-//        }
+
 
         @Override
         protected void onPreExecute() {

@@ -63,13 +63,6 @@ public class WeatherActivityFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_weather, container, false);
 
         weatherListView = (ListView)rootView.findViewById(R.id.weatherList);
-//        String[] weatherItems = {
-//                "Sunday.. Sunny..10/60",
-//                "Monday.. Sunny..10/60",
-//                "Tuesday.. Sunny..10/60",
-//                "wed.. Sunny..10/60",
-//                "Friday.. Sunny..10/60"
-//        };
 
 
         return rootView;
@@ -115,9 +108,6 @@ public class WeatherActivityFragment extends Fragment {
         // Will contain the raw JSON response as a string.
         String forecastJsonStr = null;
 
-        String format = "json";
-        String units = "metric";
-        int numDays = 7;
 
         @Override
         protected void onPreExecute() {
@@ -167,9 +157,8 @@ public class WeatherActivityFragment extends Fragment {
                     JSONObject dayInfo = days.getJSONObject(x);
                     /**** gettting date **************/
                     Long time = dayInfo.getLong("dt");
-                    Date date = new Date(time* 1000L);
+                    Date date = new Date(time * 1000);
                     SimpleDateFormat format = new SimpleDateFormat("E, MMM d");
-                    format.setTimeZone(TimeZone.getTimeZone("UTC"));
                     String dateStr = format.format(date).toString();
                     /**** gettting date **************/
 

@@ -50,7 +50,7 @@ public class OneFragment extends Fragment {
                 "Scan soil parameters",
                 "Weather Forecast",
                 "News Feeds",
-                "Answers to questions"
+                "Advisory Services"
 
         };
         List<String> activity = new ArrayList<>(
