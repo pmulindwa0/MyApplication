@@ -78,7 +78,8 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Small Text"
-            android:id="@+id/date" />
+            android:id="@+id/date"
+            android:textStyle="italic"/>
 
     </LinearLayout>
 
