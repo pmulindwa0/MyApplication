@@ -62,6 +62,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.pe_code.myapplication.SensorActivity" />
         </activity>
+        <activity
+            android:name=".AdvisoryActivity"
+            android:label="@string/title_activity_advisory"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.pe_code.myapplication.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

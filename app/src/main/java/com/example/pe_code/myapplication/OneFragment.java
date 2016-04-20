@@ -82,9 +82,8 @@ public class OneFragment extends Fragment {
                         break;
                     }
                     case 3: {
-//                        TwoFragment fragment = new TwoFragment();
-//                        getActivity().getFragmentManager().beginTransaction().
-//                                replace(R.id.fragment, fragment, "A").commit();
+                        Intent intent = new Intent(getActivity(), AdvisoryActivity.class);
+                        startActivity(intent);
                         break;
                     }
 
