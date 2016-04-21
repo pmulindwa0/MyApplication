@@ -87,13 +87,6 @@ public class SensorActivity extends IOIOActivity implements AppCompatCallback{
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_sensor, menu);
-        return true;
-    }
-
 
     @Override
     public void onSupportActionModeStarted(ActionMode mode) {
@@ -171,6 +164,14 @@ public class SensorActivity extends IOIOActivity implements AppCompatCallback{
     protected IOIOLooper createIOIOLooper() {
         return new SensorLooper();
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_sensor, menu);
+        return true;
+    }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -183,6 +184,11 @@ public class SensorActivity extends IOIOActivity implements AppCompatCallback{
             case R.id.action_settings:
                 Intent i = new Intent(this, SettingsActivity.class);
                 startActivity(i);
+                break;
+
+            case R.id.action_advice:
+                Intent intent = new Intent(this, AdvisoryActivity.class);
+                startActivity(intent);
                 break;
 
             case R.id.action_send:{
