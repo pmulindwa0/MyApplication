@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.pe_code.myapplication.models.QuestionModel;
 
@@ -182,6 +183,9 @@ public class TwoFragment extends Fragment {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+            if (questionModelList==null){
+                Toast.makeText(getActivity(), "You currently don't have any solution to you problems", Toast.LENGTH_LONG).show();
             }
             return questionModelList;
         }

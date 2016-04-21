@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.pe_code.myapplication.AdvisoryActivity"
-    tools:showIn="@layout/activity_advisory">
+    tools:context="com.example.pe_code.myapplication.AdvisoryActivity">
 <ListView
     android:id="@+id/listAdvise"
     android:layout_width="wrap_content"
