@@ -55,6 +55,7 @@ public class SensorActivity extends IOIOActivity implements AppCompatCallback{
     int i;
     String responseString;
     private AppCompatDelegate delegate;
+    private SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,6 +136,7 @@ public class SensorActivity extends IOIOActivity implements AppCompatCallback{
                 @Override
                 public void run() {
 
+
                     tempView.setText(responseString.substring(0,2));
                     tProgress.setProgress(Integer.parseInt(responseString.substring(0, 2)));
                     hProgress.setProgress(Integer.parseInt(responseString.substring(2,4)));
@@ -195,6 +197,9 @@ public class SensorActivity extends IOIOActivity implements AppCompatCallback{
 
                 QuestionModel model = new QuestionModel();
                 SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putString("sensor", responseString);
+                editor.commit();
                 String http = "http://192.168.1.124/restfullapi/request.php";
                 String charset = "UTF-8";
                 String query = null;
@@ -202,12 +207,10 @@ public class SensorActivity extends IOIOActivity implements AppCompatCallback{
                 String location = sp.getString("location", "N/A");
                 String crop = sp.getString("crop", "N/A");
                 String activity = sp.getString("activity","1");
-                if(responseString== null){
-                    responseString = "255465";
-                }
-                String temp = responseString.substring(0,2);
-                String moisture = responseString.substring(4,6);
-                String humidity = responseString.substring(2,4);
+                String sensorReading = sp.getString("sensor", "255465");
+                String temp = sensorReading.substring(0,2);
+                String moisture = sensorReading.substring(4,6);
+                String humidity = sensorReading.substring(2,4);
 
 
                 try {
@@ -240,7 +243,7 @@ public class SensorActivity extends IOIOActivity implements AppCompatCallback{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            Toast.makeText(getApplicationContext(), "Starting download",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Sending parameters....",Toast.LENGTH_LONG).show();
 
         }
         @Override
@@ -289,7 +292,7 @@ public class SensorActivity extends IOIOActivity implements AppCompatCallback{
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Toast.makeText(getApplicationContext()," Request submitted successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Done!", Toast.LENGTH_SHORT).show();
         }
     }
 

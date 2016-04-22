@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:orientation="horizontal">
@@ -15,12 +15,6 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="4dp"
             android:orientation="vertical">
-
-            <ImageButton
-                android:id="@+id/crime_imageButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_menu_report_image" />
 
         </LinearLayout>
 
@@ -42,9 +36,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:capitalize="sentences"
-                android:maxLines="5"
-                android:minLines="1"
-                android:scrollbars="vertical"
                 android:text="@string/question_hint" />
         </LinearLayout>
     </LinearLayout>
@@ -52,6 +43,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:text="@string/details_label"
         android:textStyle="bold" />
 
@@ -60,16 +52,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:capitalize="sentences"
-        android:maxLines="5"
-        android:minLines="1"
-        android:scrollbars="vertical"
-        android:text="@string/question_hint" />
+        android:capitalize="words"
+        android:textColor="#000000"
+        android:text="Your solution" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="6dp"
         android:orientation="horizontal">
 
         <CheckBox

@@ -2,6 +2,7 @@ package com.example.pe_code.myapplication;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -72,21 +73,21 @@ public class AdvisoryActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_refresh:
                 /********on refreshing******************/
-//                QuestionModel model = new QuestionModel();
+                QuestionModel model = new QuestionModel();
                 String http = "http://192.168.1.124/restfullapi/send_response.php";
-//                String charset = "UTF-8";
-//                String query = null;
-//                String imei= model.getIMEI(getApplicationContext());
-//
-//                try {
-//                    query = String.format("imei=%s", URLEncoder.encode(imei, charset));
-//                } catch (UnsupportedEncodingException e) {
-//                    e.printStackTrace();
-//                }
-//                String url = http + "?" + query;
+                String charset = "UTF-8";
+                String query = null;
+                String imei= model.getIMEI(getApplicationContext());
 
-                AdviseTask ATask = new AdviseTask();
-                ATask.execute(http);
+                    try {
+                        query = String.format("imei=%s", URLEncoder.encode(imei, charset));
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    String url = http + "?" + query;
+
+                    AdviseTask ATask = new AdviseTask();
+                    ATask.execute(url);
 
                 /********on refreshing******************/
 
@@ -219,11 +220,11 @@ public class AdvisoryActivity extends AppCompatActivity {
             TextView advice = (TextView)convertView.findViewById(R.id.advice);
             TextView moisture = (TextView)convertView.findViewById(R.id.moisture);
 
-            temperature.setText(adviceModelList.get(position).getTemperature());
-            humidity.setText(adviceModelList.get(position).getHumidity());
+            temperature.setText("Temperature: " + adviceModelList.get(position).getTemperature());
+            humidity.setText("Humidity: " + adviceModelList.get(position).getHumidity());
             date.setText(adviceModelList.get(position).getTdate());
             advice.setText(adviceModelList.get(position).getAdvice());
-            moisture.setText(adviceModelList.get(position).getMoisture());
+            moisture.setText("Moisture: " + adviceModelList.get(position).getMoisture());
 
             return convertView;
         }
