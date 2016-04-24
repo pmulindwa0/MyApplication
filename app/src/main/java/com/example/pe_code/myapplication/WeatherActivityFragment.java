@@ -156,8 +156,12 @@ public class WeatherActivityFragment extends Fragment {
                 for ( int x=0; x < days.length(); x++){
                     JSONObject dayInfo = days.getJSONObject(x);
                     /**** gettting date **************/
-                    Long time = dayInfo.getLong("dt");
-                    Date date = new Date(time * 1000);
+//                    Long time = dayInfo.getLong("dt");
+//                    Date date = new Date();
+                    java.util.Date today = new java.util.Date();
+                    final long ONE_DAY_MILLISCONDS = ( 25 * 60 * 60 * 1000);
+
+                    java.util.Date date = new java.util.Date((x * ONE_DAY_MILLISCONDS) + today.getTime());
                     SimpleDateFormat format = new SimpleDateFormat("E, MMM d");
                     String dateStr = format.format(date).toString();
                     /**** gettting date **************/

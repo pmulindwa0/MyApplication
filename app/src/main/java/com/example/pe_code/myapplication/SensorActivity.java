@@ -22,6 +22,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +51,8 @@ public class SensorActivity extends IOIOActivity implements AppCompatCallback{
     public ArcProgress hProgress;
     public ArcProgress mProgress;
     public ProgressBar tProgress;
+    public RatingBar pHRate;
+    public TextView pHText;
     TwiMaster twi;
     byte[] response;
     int i;
@@ -77,6 +80,8 @@ public class SensorActivity extends IOIOActivity implements AppCompatCallback{
         hProgress = (ArcProgress) findViewById(R.id.humidity_progress);
         mProgress = (ArcProgress) findViewById(R.id.moisture_progress);
         tProgress = (ProgressBar) findViewById(R.id.progressBar);
+        pHRate = (RatingBar) findViewById(R.id.ratingBar);
+        pHText = (TextView) findViewById(R.id.pHtextView);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -121,7 +126,7 @@ public class SensorActivity extends IOIOActivity implements AppCompatCallback{
         public void loop() throws ConnectionLostException, InterruptedException {
             super.loop();
             byte[] request = new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05 };
-            response = new byte[6];
+            response = new byte[9];
             TwiMaster.Result result = twi.writeReadAsync(8, false, request, request.length, response, response.length);
 // ...do some stuff while the transaction is taking place...
             result.waitReady();  // blocks until response is available
@@ -139,8 +144,10 @@ public class SensorActivity extends IOIOActivity implements AppCompatCallback{
 
                     tempView.setText(responseString.substring(0,2));
                     tProgress.setProgress(Integer.parseInt(responseString.substring(0, 2)));
-                    hProgress.setProgress(Integer.parseInt(responseString.substring(2,4)));
+                    hProgress.setProgress(Integer.parseInt(responseString.substring(2, 4)));
                     mProgress.setProgress(Integer.parseInt(responseString.substring(4,6)));
+                    pHRate.setRating(Float.parseFloat(responseString.substring(6)));
+                    pHText.setText(responseString.substring(6));
                 }
             });
 

@@ -5,7 +5,11 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.hardware.Camera;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -40,6 +44,7 @@ import java.net.URLEncoder;
  */
 public class ThreeFragment extends Fragment {
 private static final String DIALOG_PERSON = "person";
+    public ImageButton camera;
 
 
 
@@ -47,7 +52,7 @@ private static final String DIALOG_PERSON = "person";
         // Required empty public constructor
     }
 
-
+    @SuppressWarnings("deprecation")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -66,34 +71,50 @@ private static final String DIALOG_PERSON = "person";
 
             }
         });
-        ImageButton btnSend = (ImageButton) v.findViewById(R.id.btnSend);
-        btnSend.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                QuestionModel model = new QuestionModel();
-                Context contx;
-                contx=getActivity();
-                String http = "http://192.168.1.124/restfullapi/question.php";
-                String charset = "UTF-8";
-                String query = null;
-                String imei= model.getIMEI(getActivity());
-                String question = qnEditText.getText().toString();
-                try {
-                   query = String.format("imei=%s&question=%s", URLEncoder.encode(imei, charset),
-                           URLEncoder.encode(question, charset));
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-                String url = http + "?" + query;
-                new QuestionTask(contx).execute(url);
+            camera = (ImageButton) v.findViewById(R.id.qn_imageButton);
+            camera.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(getActivity(), CameraActivity.class);
+                    startActivity(i);}
+            });
+        PackageManager pm = getActivity().getPackageManager();
+        boolean hasACamera = pm.hasSystemFeature(PackageManager.FEATURE_CAMERA) ||
+                pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT) ||
+                (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD &&
+                        Camera.getNumberOfCameras() > 0);
+        if(!hasACamera) {
+            camera.setEnabled(false);
+        }
+                ImageButton btnSend = (ImageButton) v.findViewById(R.id.btnSend);
+                btnSend.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        QuestionModel model = new QuestionModel();
+                        Context contx;
+                        contx = getActivity();
+                        String http = "http://192.168.1.124/restfullapi/question.php";
+                        String charset = "UTF-8";
+                        String query = null;
+                        String imei = model.getIMEI(getActivity());
+                        String question = qnEditText.getText().toString();
+                        try {
+                            query = String.format("imei=%s&question=%s", URLEncoder.encode(imei, charset),
+                                    URLEncoder.encode(question, charset));
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+                        String url = http + "?" + query;
+                        new QuestionTask(contx).execute(url);
+                    }
+                });
+                return v;
             }
-        });
-        return v;
-    }
+    // If camera is not available, disable camera functionality
 
 
-}
- class QuestionTask extends AsyncTask<String,String,String >{
+        }
+        class QuestionTask extends AsyncTask<String,String,String >{
     private Context mContext;
     ProgressDialog pDialog;
     public QuestionTask(Context contx) {

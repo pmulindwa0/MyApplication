@@ -5,6 +5,8 @@
     <!-- Internet Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
 
     <application
         android:allowBackup="true"
@@ -65,6 +67,17 @@
         <activity
             android:name=".AdvisoryActivity"
             android:label="@string/title_activity_advisory"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.pe_code.myapplication.MainActivity" />
+        </activity>
+        <activity
+            android:name=".CameraActivity"
+            android:exported="true"
+            android:screenOrientation="landscape"
+            android:label="@string/title_activity_camera"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
