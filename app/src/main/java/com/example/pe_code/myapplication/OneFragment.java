@@ -47,7 +47,7 @@ public class OneFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_one, container, false);
 
         String[] activityArray = {
-                "Scan soil parameters",
+                "Scan field parameters",
                 "Weather Forecast",
                 "News Feeds",
                 "Advisory Services"

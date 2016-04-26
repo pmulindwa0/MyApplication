@@ -12,6 +12,7 @@
     <string-array name="person_array">
         <item>Extension Worker</item>
         <item>Agri-business Expert</item>
+        <item>Agronomist</item>
     </string-array>
     <string name="title_activity_sensor">Sensor Readings</string>
     <string name="temperature">25</string>

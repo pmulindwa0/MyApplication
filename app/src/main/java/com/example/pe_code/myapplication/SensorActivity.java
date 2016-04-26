@@ -39,6 +39,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 import ioio.lib.api.AnalogInput;
+import ioio.lib.api.IOIO;
 import ioio.lib.api.TwiMaster;
 import ioio.lib.api.exception.ConnectionLostException;
 import ioio.lib.util.BaseIOIOLooper;
@@ -92,7 +93,6 @@ public class SensorActivity extends IOIOActivity implements AppCompatCallback{
             }
         });
     }
-
 
     @Override
     public void onSupportActionModeStarted(ActionMode mode) {

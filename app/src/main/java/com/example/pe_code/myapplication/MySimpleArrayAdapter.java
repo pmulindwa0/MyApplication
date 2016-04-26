@@ -38,7 +38,7 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
 //            imageView.setImageResource(R.mipmap.ic_overview);
 //        }
         switch(s){
-            case "Scan soil parameters":
+            case "Scan field parameters":
                 imageView.setImageResource(R.mipmap.ic_diagonalise);
                 break;
             case "Weather Forecast":
