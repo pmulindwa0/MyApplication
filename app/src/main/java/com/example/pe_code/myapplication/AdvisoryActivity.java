@@ -74,7 +74,7 @@ public class AdvisoryActivity extends AppCompatActivity {
             case R.id.action_refresh:
                 /********on refreshing******************/
                 QuestionModel model = new QuestionModel();
-                String http = "http://192.168.1.124/restfullapi/send_response.php";
+                String http = "http://192.168.0.3/restfullapi/send_response.php";
                 String charset = "UTF-8";
                 String query = null;
                 String imei= model.getIMEI(getApplicationContext());

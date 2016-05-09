@@ -80,7 +80,7 @@ public class TwoFragment extends Fragment {
                 QuestionModel model = new QuestionModel();
                 Context contx;
                 contx=getActivity();
-                String http = "http://192.168.1.124/restfullapi/get_answers.php";
+                String http = "http://192.168.0.3/restfullapi/get_answers.php";
                 String charset = "UTF-8";
                 String query = null;
                 String imei= model.getIMEI(getActivity());

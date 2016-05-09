@@ -93,7 +93,7 @@ private static final String DIALOG_PERSON = "person";
                         QuestionModel model = new QuestionModel();
                         Context contx;
                         contx = getActivity();
-                        String http = "http://192.168.1.124/restfullapi/question.php";
+                        String http = "http://192.168.0.3/restfullapi/question.php";
                         String charset = "UTF-8";
                         String query = null;
                         String imei = model.getIMEI(getActivity());
